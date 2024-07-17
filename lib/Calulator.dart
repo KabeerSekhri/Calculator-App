@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class Calulator extends StatefulWidget {
   const Calulator({super.key});
@@ -15,6 +16,7 @@ class _CalulatorState extends State<Calulator> {
   num? finalVal;
   bool complete = false;
   String operation = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,22 +26,33 @@ class _CalulatorState extends State<Calulator> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 20,
+              height: 30,
             ),
-            complete == false
-                ? (operation == ""
-                    ? Text(
-                        "$firstVal",
-                        style: TextStyle(color: Colors.white, fontSize: 70),
-                      )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SizedBox(
+                  width: 55,
+                ),
+                complete == false
+                    ? (operation == ""
+                        ? Text(
+                            "$firstVal",
+                            style: TextStyle(color: Colors.white, fontSize: 70),
+                          )
+                        : Text(
+                            "$secondVal",
+                            style: TextStyle(color: Colors.white, fontSize: 70),
+                          ))
                     : Text(
-                        "$secondVal",
+                        "$finalVal",
                         style: TextStyle(color: Colors.white, fontSize: 70),
-                      ))
-                : Text(
-                    "$finalVal",
-                    style: TextStyle(color: Colors.white, fontSize: 70),
-                  ),
+                      ),
+                SizedBox(
+                  width: 55,
+                )
+              ],
+            ),
             SizedBox(
               height: 30,
             ),
@@ -162,7 +175,7 @@ class _CalulatorState extends State<Calulator> {
                     ),
                     shape: CircleBorder(),
                     padding: EdgeInsets.all(15),
-                    fillColor: Colors.lightBlue[900],
+                    fillColor: Colors.lightBlue[700],
                     hoverColor: Colors.grey[800],
                     elevation: 4,
                     hoverElevation: 2,
@@ -295,7 +308,7 @@ class _CalulatorState extends State<Calulator> {
                     ),
                     shape: CircleBorder(),
                     padding: EdgeInsets.all(15),
-                    fillColor: Colors.lightBlue[900],
+                    fillColor: Colors.lightBlue[700],
                     hoverColor: Colors.grey[800],
                     elevation: 4,
                     hoverElevation: 2,
@@ -428,7 +441,7 @@ class _CalulatorState extends State<Calulator> {
                     ),
                     shape: CircleBorder(),
                     padding: EdgeInsets.all(15),
-                    fillColor: Colors.lightBlue[900],
+                    fillColor: Colors.lightBlue[700],
                     hoverColor: Colors.grey[800],
                     elevation: 4,
                     hoverElevation: 2,
@@ -440,7 +453,7 @@ class _CalulatorState extends State<Calulator> {
               ],
             ),
             SizedBox(
-              height: 25,
+              height: 15,
             ),
             Row(children: [
               SizedBox(
@@ -451,12 +464,16 @@ class _CalulatorState extends State<Calulator> {
                 child: RawMaterialButton(
                   onPressed: () {
                     if (operation == "") {
-                      firstVal = (firstVal * 10);
-                      lenOne = firstVal.toString().length;
+                      setState(() {
+                        firstVal = (firstVal * 10);
+                        lenOne = firstVal.toString().length;
+                      });
                       print("1st $firstVal");
                     } else {
-                      secondVal = (secondVal * 10);
-                      lenTwo = secondVal.toString().length;
+                      setState(() {
+                        secondVal = (secondVal * 10);
+                        lenTwo = secondVal.toString().length;
+                      });
                       print("2nd $secondVal");
                     }
                   },
@@ -490,7 +507,7 @@ class _CalulatorState extends State<Calulator> {
                   ),
                   shape: CircleBorder(),
                   padding: EdgeInsets.all(15),
-                  fillColor: Colors.lightBlue[900],
+                  fillColor: Colors.lightBlue[700],
                   hoverColor: Colors.grey[800],
                   elevation: 4,
                   hoverElevation: 2,
@@ -511,7 +528,7 @@ class _CalulatorState extends State<Calulator> {
                   ),
                   shape: CircleBorder(),
                   padding: EdgeInsets.all(15),
-                  fillColor: Colors.lightBlue[900],
+                  fillColor: Colors.lightBlue[700],
                   hoverColor: Colors.grey[800],
                   elevation: 4,
                   hoverElevation: 2,
@@ -524,10 +541,7 @@ class _CalulatorState extends State<Calulator> {
                     setState(() {
                       complete = true;
                     });
-
-                    if (firstVal == null || secondVal == null) {
-                      print("enter all values");
-                    } else if (operation == "") {
+                    if (operation == "") {
                       print("select an operation");
                     } else if (operation == "+") {
                       finalVal = (firstVal! + secondVal!);
@@ -545,6 +559,11 @@ class _CalulatorState extends State<Calulator> {
                       finalVal = (firstVal! % secondVal!);
                       print("final $finalVal");
                     }
+
+                    setState(() {
+                      firstVal = finalVal!;
+                      secondVal = 0;
+                    });
                   },
                   child: Text(
                     "=",
@@ -555,7 +574,7 @@ class _CalulatorState extends State<Calulator> {
                   ),
                   shape: CircleBorder(),
                   padding: EdgeInsets.all(15),
-                  fillColor: Colors.lightBlue[900],
+                  fillColor: Colors.indigo[900],
                   hoverColor: Colors.grey[800],
                   elevation: 4,
                   hoverElevation: 2,
@@ -568,34 +587,32 @@ class _CalulatorState extends State<Calulator> {
             SizedBox(
               height: 15,
             ),
-            Row(children: [
-              Expanded(
-                flex: 4,
-                child: RawMaterialButton(
-                  onPressed: () {
-                    setState(() {
-                      firstVal = 0;
-                      secondVal = 0;
-                      operation = "";
-                      complete = false;
-                    });
-                    print("1: $firstVal");
-                    print("2: $secondVal");
-                  },
-                  child: Text(
-                    "AC",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25),
-                  ),
-                  shape: CircleBorder(),
-                  padding: EdgeInsets.all(15),
-                  fillColor: Colors.lightBlue[900],
-                  hoverColor: Colors.grey[800],
-                  elevation: 4,
-                  hoverElevation: 2,
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              RawMaterialButton(
+                onPressed: () {
+                  setState(() {
+                    firstVal = 0;
+                    secondVal = 0;
+                    finalVal = null;
+                    operation = "";
+                    complete = false;
+                  });
+                  print("1: $firstVal");
+                  print("2: $secondVal");
+                },
+                child: Text(
+                  "AC",
+                  style: TextStyle(
+                      color: Colors.lightBlue,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25),
                 ),
+                shape: CircleBorder(),
+                padding: EdgeInsets.all(15),
+                fillColor: Colors.grey[800],
+                elevation: 10,
+                hoverElevation: 2,
+                animationDuration: Duration(milliseconds: 2),
               ),
             ]),
           ],
