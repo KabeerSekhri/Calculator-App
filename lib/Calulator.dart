@@ -10,8 +10,6 @@ class Calulator extends StatefulWidget {
 class _CalulatorState extends State<Calulator> {
   num firstVal = 0;
   num secondVal = 0;
-  int lenOne = 0;
-  int lenTwo = 0;
   num? finalVal;
   bool complete = false;
   String operation = "";
@@ -67,13 +65,11 @@ class _CalulatorState extends State<Calulator> {
                       if (operation == "") {
                         setState(() {
                           firstVal = (firstVal * 10) + 7;
-                          lenOne = firstVal.toString().length;
                         });
                         print("1st $firstVal");
                       } else {
                         setState(() {
                           secondVal = (secondVal * 10) + 7;
-                          lenTwo = secondVal.toString().length;
                         });
                         print("2nd $secondVal");
                       }
@@ -100,13 +96,11 @@ class _CalulatorState extends State<Calulator> {
                       if (operation == "") {
                         setState(() {
                           firstVal = (firstVal * 10) + 8;
-                          lenOne = firstVal.toString().length;
                         });
                         print("1st $firstVal");
                       } else {
                         setState(() {
                           secondVal = (secondVal * 10) + 8;
-                          lenTwo = secondVal.toString().length;
                         });
                         print("2nd $secondVal");
                       }
@@ -133,13 +127,11 @@ class _CalulatorState extends State<Calulator> {
                       if (operation == "") {
                         setState(() {
                           firstVal = (firstVal * 10) + 9;
-                          lenOne = firstVal.toString().length;
                         });
                         print("1st $firstVal");
                       } else {
                         setState(() {
                           secondVal = (secondVal * 10) + 9;
-                          lenTwo = secondVal.toString().length;
                         });
                         print("2nd $secondVal");
                       }
@@ -164,6 +156,7 @@ class _CalulatorState extends State<Calulator> {
                   child: RawMaterialButton(
                     onPressed: () {
                       operation = "/";
+                      complete = false;
                     },
                     child: Text(
                       "÷",
@@ -200,13 +193,11 @@ class _CalulatorState extends State<Calulator> {
                       if (operation == "") {
                         setState(() {
                           firstVal = (firstVal * 10) + 4;
-                          lenOne = firstVal.toString().length;
                         });
                         print("1st $firstVal");
                       } else {
                         setState(() {
                           secondVal = (secondVal * 10) + 4;
-                          lenTwo = secondVal.toString().length;
                         });
                         print("2nd $secondVal");
                       }
@@ -233,13 +224,11 @@ class _CalulatorState extends State<Calulator> {
                       if (operation == "") {
                         setState(() {
                           firstVal = (firstVal * 10) + 5;
-                          lenOne = firstVal.toString().length;
                         });
                         print("1st $firstVal");
                       } else {
                         setState(() {
                           secondVal = (secondVal * 10) + 5;
-                          lenTwo = secondVal.toString().length;
                         });
                         print("2nd $secondVal");
                       }
@@ -266,13 +255,11 @@ class _CalulatorState extends State<Calulator> {
                       if (operation == "") {
                         setState(() {
                           firstVal = (firstVal * 10) + 6;
-                          lenOne = firstVal.toString().length;
                         });
                         print("1st $firstVal");
                       } else {
                         setState(() {
                           secondVal = (secondVal * 10) + 6;
-                          lenTwo = secondVal.toString().length;
                         });
                         print("2nd $secondVal");
                       }
@@ -297,6 +284,7 @@ class _CalulatorState extends State<Calulator> {
                   child: RawMaterialButton(
                     onPressed: () {
                       operation = "*";
+                      complete = false;
                     },
                     child: Text(
                       "×",
@@ -333,13 +321,11 @@ class _CalulatorState extends State<Calulator> {
                       if (operation == "") {
                         setState(() {
                           firstVal = (firstVal * 10) + 1;
-                          lenOne = firstVal.toString().length;
                         });
                         print("1st $firstVal");
                       } else {
                         setState(() {
                           secondVal = (secondVal * 10) + 1;
-                          lenTwo = secondVal.toString().length;
                         });
                         print("2nd $secondVal");
                       }
@@ -366,13 +352,11 @@ class _CalulatorState extends State<Calulator> {
                       if (operation == "") {
                         setState(() {
                           firstVal = (firstVal * 10) + 2;
-                          lenOne = firstVal.toString().length;
                         });
                         print("1st $firstVal");
                       } else {
                         setState(() {
                           secondVal = (secondVal * 10) + 2;
-                          lenTwo = secondVal.toString().length;
                         });
                         print("2nd $secondVal");
                       }
@@ -399,13 +383,11 @@ class _CalulatorState extends State<Calulator> {
                       if (operation == "") {
                         setState(() {
                           firstVal = (firstVal * 10) + 3;
-                          lenOne = firstVal.toString().length;
                         });
                         print("1st $firstVal");
                       } else {
                         setState(() {
                           secondVal = (secondVal * 10) + 3;
-                          lenTwo = secondVal.toString().length;
                         });
                         print("2nd $secondVal");
                       }
@@ -430,6 +412,7 @@ class _CalulatorState extends State<Calulator> {
                   child: RawMaterialButton(
                     onPressed: () {
                       operation = "%";
+                      complete = false;
                     },
                     child: Text(
                       "%",
@@ -465,13 +448,11 @@ class _CalulatorState extends State<Calulator> {
                     if (operation == "") {
                       setState(() {
                         firstVal = (firstVal * 10);
-                        lenOne = firstVal.toString().length;
                       });
                       print("1st $firstVal");
                     } else {
                       setState(() {
                         secondVal = (secondVal * 10);
-                        lenTwo = secondVal.toString().length;
                       });
                       print("2nd $secondVal");
                     }
@@ -495,10 +476,11 @@ class _CalulatorState extends State<Calulator> {
                 flex: 1,
                 child: RawMaterialButton(
                   onPressed: () {
-                    operation = "+";
+                    operation = "-";
+                    complete = false;
                   },
                   child: Text(
-                    "+",
+                    "-",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -516,10 +498,11 @@ class _CalulatorState extends State<Calulator> {
                 flex: 1,
                 child: RawMaterialButton(
                   onPressed: () {
-                    operation = "-";
+                    operation = "+";
+                    complete = false;
                   },
                   child: Text(
-                    "-",
+                    "+",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
